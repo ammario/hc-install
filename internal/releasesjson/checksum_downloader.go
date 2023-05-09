@@ -143,7 +143,7 @@ func compareChecksum(logger *log.Logger, r io.Reader, verifiedHashSum HashSum, f
 	// is expected to be http.Response.Body which streams the bytes
 	// on demand over the network.
 	logger.Printf("copying %q (%d bytes) to calculate checksum", filename, expectedSize)
-	bytesCopied, err := io.Copy(h, r)
+	bytesCopied, err := ioCopy(h, r)
 	if err != nil {
 		return err
 	}

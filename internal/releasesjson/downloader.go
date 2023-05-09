@@ -131,7 +131,7 @@ func (d *Downloader) DownloadAndUnpack(ctx context.Context, pv *ProductVersion, 
 	// this may take a while depending on network connection as the io.Reader
 	// is expected to be http.Response.Body which streams the bytes
 	// on demand over the network.
-	bytesCopied, err := io.Copy(pkgFile, pkgReader)
+	bytesCopied, err := ioCopy(pkgFile, pkgReader)
 	if err != nil {
 		return pkgFilePath, err
 	}
@@ -166,7 +166,7 @@ func (d *Downloader) DownloadAndUnpack(ctx context.Context, pv *ProductVersion, 
 			return pkgFilePath, err
 		}
 
-		_, err = io.Copy(dstFile, srcFile)
+		_, err = ioCopy(dstFile, srcFile)
 		if err != nil {
 			return pkgFilePath, err
 		}
